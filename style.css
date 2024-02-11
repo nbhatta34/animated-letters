@@ -1,0 +1,66 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main {
+  --high-opacity: 1;
+  --low-opacity: 0.6;
+  --spiral-height: 100px;
+  --letter-gap: 10px;
+  --animation-duration: 5s;
+}
+
+.main {
+  background-color: #18032c;
+  color: #ffffff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  text-transform: uppercase;
+}
+
+/* Custom Property */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.animated-span,
+.animated-span-2 {
+  display: flex;
+  align-items: center;
+  gap: var(--letter-gap);
+  position: absolute;
+}
+
+.animated-span span {
+  display: inline-block;
+  transform: translateY(calc(sin(var(--angle)) * var(--spiral-height)))
+    scale(calc(cos(var(--angle)) * 0.5 + 0.5));
+  animation: spiral var(--animation-duration) linear infinite;
+}
+
+.animated-span-2 span {
+  display: inline-block;
+  transform: translateY(calc(sin(var(--angle)) * var(--spiral-height)))
+    scale(calc(cos(var(--angle)) * 0.5 + 0.5));
+  animation: spiral var(--animation-duration) linear infinite;
+}
+
+@keyframes spiral {
+  0% {
+    --angle: 360deg;
+    opacity: var(--high-opacity);
+  }
+  100% {
+    --angle: 0deg;
+    opacity: var(--low-opacity);
+  }
+}
